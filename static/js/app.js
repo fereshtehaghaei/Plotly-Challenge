@@ -3,22 +3,28 @@ function demographicInfo(){
     
     d3.json("/data/samples.json").then((data) => {
             console.log(data);
-        
+              
         var metaData = data.metadata;
             console.log(metaData);
         
         var metaDataID = metaData.map(item => item.id);
             console.log(metaDataID);    
 
-        var results = d3.select("#sample-metadata");
+            
+        var metaDataSelector = d3.select("#sample-metadata");
+        
+        metaDataSelector.html(""); 
 
         Object.entries(metaData[0]).forEach(([key, value]) => {
-            results.append("p").text(`${key}:${value}`);
-           
-        
+            metaDataSelector.append("p").text(`${key.toUpperCase()} : ${value}`).append('hr');
+
 
         });
+
+        
     });
+
+    
 }
 
 
@@ -127,34 +133,38 @@ function DropDownMenu() {
 
  // init Function to load the sample on loading html page
  function init(){
-    // d3.json("samples.json").then((data) => {
-    //     console.log(data);
+    d3.json("samples.json").then((data) => {
+        console.log(data);
 
-    //     var metaDataID = data.metadata.map(item => item.id);
-    //     console.log(metaDataID);
+        var firstSample = data.metadata.map(item => item.id);
+        console.log(firstSample);
 
-        DropDownMenu("940");
+        DropDownMenu(firstSample);
 
-        buildPlot("940");
+        buildPlot(firstSample);
 
-        demographicInfo("940");
-    // });
+        demographicInfo(firstSample);
+        
+        
+     });
 }
 
 
 d3.selectAll("#selDataset").on("change", optionChanged);
 
-// Changing values, info, graphs as menu ID changes
-function optionChanged(val){
+// Fetch new data each time a new sample is selected
+function optionChanged(newSample){
 
-    DropDownMenu(val);
+    DropDownMenu(newSample);
 
-    buildPlot(val);
+    buildPlot(newSample);
 
-    demographicInfo(val);
+    demographicInfo(newSample);
+
+    
 }
 
 
-// Call the init function
+// Initialize the dashboard
 init();
 
