@@ -1,17 +1,17 @@
-function displayDemographicData(){
+function demographicInfo(sample){
     
     d3.json("/data/samples.json").then((data) => {
             console.log(data);
         
-        var metaData = data.metadata[0];
+        var metaData = data.metadata;
             console.log(metaData);
         
-        // var metaDataID = metaData.map(item => item.id);
-        //     console.log(metaDataID);    
+        var metaDataID = metaData.map(item => item.id == sample);
+            console.log(metaDataID);    
 
         var results = d3.select("#sample-metadata");
 
-        Object.entries(metaData).forEach(([key, value]) => {
+        Object.entries(metaData[0]).forEach(([key, value]) => {
             results.append("p").text(`${key}:${value}`);
            
         
@@ -20,20 +20,7 @@ function displayDemographicData(){
     });
 }
 
-function init(){
-        d3.json("samples.json").then((data) => {
-            console.log(data);
 
-            var metaDataID = data.metadata.map(item => item.id);
-            console.log(metaDataID);
-
-            DropDownMenu();
-
-            buildPlot();
-
-            displayDemographicData();
-        });
-    }
 
 function DropDownMenu() {
     d3.json("/data/samples.json").then((data) => {
@@ -137,10 +124,29 @@ function DropDownMenu() {
 
  }
 
-// function optionChanged(blah){
-//     buildPlot(blah);
-// //    displayDemographicData(blah);
-// }
+ function init(){
+    // d3.json("samples.json").then((data) => {
+    //     console.log(data);
+
+    //     var metaDataID = data.metadata.map(item => item.id);
+    //     console.log(metaDataID);
+
+        DropDownMenu("1601");
+
+        buildPlot("1601");
+
+        demographicInfo("1601");
+    // });
+}
+
+function optionChanged(val){
+
+    DropDownMenu(val);
+
+    buildPlot(val);
+
+    demographicInfo(val);
+}
 
 init();
 
