@@ -1,4 +1,5 @@
-function demographicInfo(sample){
+// Demographic Info Display Card
+function demographicInfo(){
     
     d3.json("/data/samples.json").then((data) => {
             console.log(data);
@@ -6,7 +7,7 @@ function demographicInfo(sample){
         var metaData = data.metadata;
             console.log(metaData);
         
-        var metaDataID = metaData.map(item => item.id == sample);
+        var metaDataID = metaData.map(item => item.id);
             console.log(metaDataID);    
 
         var results = d3.select("#sample-metadata");
@@ -21,7 +22,7 @@ function demographicInfo(sample){
 }
 
 
-
+// Drop Down Menu for MetaData IDs
 function DropDownMenu() {
     d3.json("/data/samples.json").then((data) => {
         console.log(data);
@@ -41,7 +42,7 @@ function DropDownMenu() {
 
 }
 
-
+// Building Bar and Bubble Chart
  function buildPlot(){
 
     d3.json("/data/samples.json").then((data) => {
@@ -124,6 +125,7 @@ function DropDownMenu() {
 
  }
 
+ // init Function to load the sample on loading html page
  function init(){
     // d3.json("samples.json").then((data) => {
     //     console.log(data);
@@ -131,14 +133,18 @@ function DropDownMenu() {
     //     var metaDataID = data.metadata.map(item => item.id);
     //     console.log(metaDataID);
 
-        DropDownMenu("1601");
+        DropDownMenu("940");
 
-        buildPlot("1601");
+        buildPlot("940");
 
-        demographicInfo("1601");
+        demographicInfo("940");
     // });
 }
 
+
+d3.selectAll("#selDataset").on("change", optionChanged);
+
+// Changing values, info, graphs as menu ID changes
 function optionChanged(val){
 
     DropDownMenu(val);
@@ -148,5 +154,7 @@ function optionChanged(val){
     demographicInfo(val);
 }
 
+
+// Call the init function
 init();
 
