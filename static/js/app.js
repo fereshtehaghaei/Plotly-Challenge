@@ -16,7 +16,7 @@ function demographicInfo(){
         metaDataSelector.html(""); 
 
         Object.entries(metaData[0]).forEach(([key, value]) => {
-            metaDataSelector.append("p").text(`${key.toUpperCase()} : ${value}`).append('hr');
+            metaDataSelector.append("p").text(`${key.toUpperCase()} : ${value}`);
 
 
         });
@@ -25,7 +25,7 @@ function demographicInfo(){
     });
 
     
-}
+};
 
 
 // Drop Down Menu for MetaData IDs
@@ -46,7 +46,7 @@ function DropDownMenu() {
     });
 });
 
-}
+};
 
 // Building Bar and Bubble Chart
  function buildPlot(){
@@ -75,14 +75,14 @@ function DropDownMenu() {
             type: "bar",
             orientation: "h",
             marker: {
-                color: 'rgb(142,124,195)'
+                color: 'rgb(142,124,195)',
               }
           };
         
           var data = [barchart];
 
           var layout = {
-            title: "Belly Button Bacteria Top 10 OTUs",
+            title: "<b>Belly Button Bacteria Top 10 OTUs<b>",
             margin: {
               l: 100,
               r: 100,
@@ -90,6 +90,8 @@ function DropDownMenu() {
               b: 50
             },
             xaxis: {title:"Sample Values"},
+            width: 500,
+            height: 600
           };
 
           Plotly.newPlot("bar", data, layout);
@@ -115,7 +117,7 @@ function DropDownMenu() {
           var data = [bubblechart];
 
           var layout = {
-            title: "Belly Button Bacteria Bubble Chart",
+            title: "<b>Belly Button Bacteria Bubble Chart</b>",
             margin: {
                 l: 100,
                 r: 100,
@@ -129,7 +131,7 @@ function DropDownMenu() {
           Plotly.newPlot("bubble", data, layout);
     });
 
- }
+ };
 
  // init Function to load the sample on loading html page
  function init(){
@@ -147,7 +149,14 @@ function DropDownMenu() {
         
         
      });
-}
+};
+
+
+
+
+
+// Initialize the dashboard
+init();
 
 
 d3.selectAll("#selDataset").on("change", optionChanged);
@@ -160,11 +169,5 @@ function optionChanged(newSample){
     buildPlot(newSample);
 
     demographicInfo(newSample);
-
-    
-}
-
-
-// Initialize the dashboard
-init();
+};
 
