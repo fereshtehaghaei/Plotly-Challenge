@@ -1,13 +1,13 @@
 // Demographic Info Display Card
-function demographicInfo(){
+function demographicInfo(sample){
     
-    d3.json("/data/samples.json").then((data) => {
+    d3.json("data/samples.json").then((data) => {
             console.log(data);
               
         var metaData = data.metadata;
             console.log(metaData);
         
-        var metaDataID = metaData.map(item => item.id);
+        var metaDataID = metaData.filter(item => item.id == sample);
             console.log(metaDataID);    
 
             
@@ -15,7 +15,8 @@ function demographicInfo(){
         
         metaDataSelector.html(""); 
 
-        Object.entries(metaData[0]).forEach(([key, value]) => {
+
+        Object.entries(metaDataID[0]).forEach(([key, value]) => {
             metaDataSelector.append("p").text(`${key.toUpperCase()} : ${value}`);
 
 
@@ -30,7 +31,7 @@ function demographicInfo(){
 
 // Drop Down Menu for MetaData IDs
 function DropDownMenu() {
-    d3.json("/data/samples.json").then((data) => {
+    d3.json("data/samples.json").then((data) => {
         console.log(data);
 
     var metaDataID = data.metadata;
@@ -49,19 +50,24 @@ function DropDownMenu() {
 };
 
 // Building Bar and Bubble Chart
- function buildPlot(){
+ function buildPlot(sample){
 
-    d3.json("/data/samples.json").then((data) => {
+    d3.json("data/samples.json").then((data) => {
         samples = data.samples;
         console.log(samples);
+
+        var result = samples.filter(item => item.id == sample)
            
-        var otu_ids = samples[0].otu_ids.slice(0,10).reverse().map(id => id);
+        var otu_ids = result[0].otu_ids.slice(0,10).reverse();
+                      console.log(otu_ids);
+        
+        var otu_ids = result[0].otu_ids.slice(0,10).reverse();
                       console.log(otu_ids);
 
-        var sample_values = samples[0].sample_values.slice(0,10).reverse();
+        var sample_values = result[0].sample_values.slice(0,10).reverse();
                             console.log(sample_values);
         
-        var otu_labels = samples[0].otu_labels.slice(0,10).reverse();
+        var otu_labels = result[0].otu_labels.slice(0,10).reverse();
                          console.log(otu_labels);
 
 
@@ -102,7 +108,7 @@ function DropDownMenu() {
           //*********** BUBBLE CHART ******
           //*******************************
           var bubblechart = {
-            x: otu_ids.map(otu_ids => `OTU ${otu_ids}`),
+            x: otu_ids,
             y: sample_values,
             text: otu_labels,
             type: "scatter",
@@ -133,41 +139,33 @@ function DropDownMenu() {
 
  };
 
+ // option changed
+ function optionChanged(sample2){
+
+  demographicInfo(sample2);
+  buildPlot(sample2);
+
+ }
+
+
  // init Function to load the sample on loading html page
  function init(){
-    d3.json("samples.json").then((data) => {
+
+    d3.json("data/samples.json").then((data) => {
         console.log(data);
 
         var firstSample = data.metadata.map(item => item.id);
-        console.log(firstSample);
 
-        DropDownMenu(firstSample);
+        console.log(firstSample[0]);
 
-        buildPlot(firstSample);
+        DropDownMenu(firstSample[0]);
 
-        demographicInfo(firstSample);
+        buildPlot(firstSample[0]);
+
+        demographicInfo(firstSample[0]);
         
         
      });
 };
 
-
-
-
-
-// Initialize the dashboard
 init();
-
-
-d3.selectAll("#selDataset").on("change", optionChanged);
-
-// Fetch new data each time a new sample is selected
-function optionChanged(newSample){
-
-    DropDownMenu(newSample);
-
-    buildPlot(newSample);
-
-    demographicInfo(newSample);
-};
-
