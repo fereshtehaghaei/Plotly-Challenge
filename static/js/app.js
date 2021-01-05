@@ -169,8 +169,14 @@ function DropDownMenu() {
 
  };
 
+ //************************WASH FREQ****************************
+ d3.json("data/samples.json").then(function(data){
 
+  var wash_freq = data.metadata.wfreq;
+  console.log(wash_freq);
+ });
 
+ //*********************************************************** */
 
  
  // ***FUNCTION***
