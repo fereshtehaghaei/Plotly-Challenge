@@ -148,33 +148,54 @@ function DropDownMenu() {
 
 
 
-          var piechart = {
-            values: sample_values,
-            labels: otu_ids,
-            hovertext: otu_labels,
-            type: 'pie'
-          };
+//           var piechart = {
+//             values: sample_values,
+//             labels: otu_ids,
+//             hovertext: otu_labels,
+//             type: 'pie'
+//           };
 
-          var data = [piechart];
+//           var data = [piechart];
       
-          var layout = {
-            height: 500,
-            width: 600
-          };
+//           var layout = {
+//             height: 500,
+//             width: 600
+//           };
       
-          Plotly.newPlot('pie', data, layout);
+//           Plotly.newPlot('pie', data, layout);
       
       
-    });
 
- };
 
  //************************WASH FREQ****************************
- d3.json("data/samples.json").then(function(data){
-
-  var wash_freq = data.metadata.wfreq;
+ d3.json("data/samples.json").then((data) => {
+  console.log(data);
+  var sample = data.metadata;
+  var wash_freq = sample.map(item => item.wfreq);
   console.log(wash_freq);
- });
+
+  var piechart = {
+    values: wash_freq,
+    //labels: otu_ids,
+    hovertext: otu_labels,
+    type: 'pie'
+  };
+
+  var data = [piechart];
+
+  var layout = {
+    height: 500,
+    width: 600
+  };
+
+  Plotly.newPlot('pie', data, layout);
+
+
+});
+
+});
+
+};
 
  //*********************************************************** */
 
