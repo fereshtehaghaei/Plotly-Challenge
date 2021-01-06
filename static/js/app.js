@@ -1,3 +1,12 @@
+// metadata key elements
+        // [0] = "id"
+        // [1] = "ethnicity"
+        // [2] = "gender"
+        // [3] = "age"
+        // [4] = "location"
+        // [5] = "bbtype"
+        // [6] = "wfreq"
+
 // ***FUNCTION***
 // Demographic Info Display Card
 function demographicInfo(sample){
@@ -104,8 +113,8 @@ function DropDownMenu() {
           var data = [barchart];
 
           var layout = {
-            title: "<b>Belly Button Bacteria Top 10 OTUs<b>",
-            titlefont: {family: '"Arial, Helvetica, sans-serif'},
+            title: '<b> Belly Button Bacteria </b> <br> Top 10 Samples </b>',
+            titlefont: {family: 'Arial, Helvetica, sans-serif'},
             margin: {
               l: 100,
               r: 100,
@@ -140,8 +149,8 @@ function DropDownMenu() {
           var data = [bubblechart];
 
           var layout = {
-            title: "<b>Belly Button Bacteria Bubble Chart</b>",
-            titlefont: {family: '"Arial, Helvetica, sans-serif'},
+            title: "<b>Belly Button Bacteria</b> <br> Samples per OTU ID</b>",
+            titlefont: {family: 'Arial, Helvetica, sans-serif'},
             margin: {
                 l: 100,
                 r: 100,
@@ -196,7 +205,7 @@ function DropDownMenu() {
         domain: { x: [0, 1], y: [0, 1] },
         value: metaDataID[0].wfreq,
         title: { text: "<b>Belly Button Washing Frequency</b><br>Scrubs Per Week" },
-        titlefont: {family: '"Arial, Helvetica, sans-serif'},
+        titlefont: {family: 'Arial, Helvetica, sans-serif'},
         
         
         // text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
@@ -223,8 +232,9 @@ function DropDownMenu() {
             { range: [8, 9], color: 'rgb(128, 178, 112)' },
             { range: [9, 10], color: 'rgb(110, 167, 108)' }
           ],
-       }
-    }
+       
+       },
+    },
       ];
   
   var data = gaugechart;
