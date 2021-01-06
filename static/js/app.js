@@ -52,9 +52,15 @@ function DropDownMenu() {
         results.append("option").text(`${value}`);
 
     });
+
+    return metaDataIDs;
 });
 
 };
+
+// Building Gauge Graph
+
+
 
 // ***FUNCTION***
 // Building BAR and BUBBLE Chart
@@ -71,13 +77,13 @@ function DropDownMenu() {
         var result = results[0];
            
         var otu_ids = result.otu_ids;
-            console.log(otu_ids);
+            //console.log(otu_ids);
     
         var sample_values = result.sample_values;
-            console.log(sample_values);
+            //console.log(sample_values);
         
         var otu_labels = result.otu_labels;
-            console.log(otu_labels);
+            //console.log(otu_labels);
 
 
           //*******************************
@@ -147,56 +153,82 @@ function DropDownMenu() {
           Plotly.newPlot("bubble", data, layout);
 
 
+          //*******************************
+          //*********** Pie CHART ******
+          //*******************************
+          // var piechart = {
+          //   values: sample_values.slice(0,10).reverse(),
+          //   labels: otu_ids,
+          //   hovertext: otu_labels,
+          //   type: 'pie'
+          // };
 
-//           var piechart = {
-//             values: sample_values,
-//             labels: otu_ids,
-//             hovertext: otu_labels,
-//             type: 'pie'
-//           };
-
-//           var data = [piechart];
+          // var data = [piechart];
       
-//           var layout = {
-//             height: 500,
-//             width: 600
-//           };
+          // var layout = {
+          //   height: 500,
+          //   width: 600
+          // };
       
-//           Plotly.newPlot('pie', data, layout);
+          // Plotly.newPlot('pie', data, layout);
       
       
 
 
- //************************WASH FREQ****************************
+          //*********** WASH FREQ**********
+          //*******************************
+          //*********** GAUGE CHART ******
+          //*******************************
  d3.json("data/samples.json").then((data) => {
-  console.log(data);
-  var sample = data.metadata;
-  var wash_freq = sample.map(item => item.wfreq);
-  console.log(wash_freq);
+    console.log(data);
+    var metaData = data.metadata;
+    //console.log(metaData);
 
-  var data = [
-    {
-      domain: { x: [0, 1], y: [0, 1] },
-      value: wash_freq,
-      title: { text: "<b>Belly Button Washing Frequency</b><br>Scrubs Per Week" },
-      type: "indicator",
-      mode: "gauge+number",
-      gauge: {
-        axis: { range: [null, 10] },
-      
+  // filter metadataID for one or more results
+    var metaDataID = metaData.filter(item => item.id == sample);
+        console.log('HERE');
+        console.log(metaDataID[0].wfreq); 
+
+    var data = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: metaDataID[0].wfreq,
+        title: { text: "<b>Belly Button Washing Frequency</b><br>Scrubs Per Week" },
+        type: "indicator",
+        mode: "gauge+number",
+        gauge: {
+          axis: { range: [null, 10] },
+          bar: {color: "red"},
+          steps: [
+            { range: [0, 1], color: "rgb(204,214,204)" },
+            { range: [1, 2], color: "rgb(186,206,186)" },
+            { range: [2, 3], color: "rgb(168,199,168)" },
+            { range: [3, 4], color: "rgb(150,191,150)" },
+            { range: [4, 5], color: "rgb(132,184,132)" },
+            { range: [5, 6], color: "rgb(115,176,114)" },
+            { range: [6, 7], color: "rgb(95,168,96)" },
+            { range: [7, 8], color: "rgb(78,161,78)" },
+            { range: [8, 9], color: "rgb(60,153,60)" },
+            { range: [9, 10], color: "rgb(42,146,42)" }
+          ],
+       }
     }
-  }
-  ];
+      ];
   
-  var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+ 
+  var layout = { width: 600, 
+                 height: 500, 
+                 margin: { t: 0, b: 0 } 
+                };
+
   Plotly.newPlot('gauge', data, layout);
 
 
-});
+  });
 
-});
+  });
 
-};
+  };
 
  //*********************************************************** */
 
@@ -207,6 +239,7 @@ function DropDownMenu() {
 
     demographicInfo(newValue);
     buildPlot(newValue);
+    //DropDownMenu(newValue);
 
  }
 
