@@ -174,21 +174,22 @@ function DropDownMenu() {
   var wash_freq = sample.map(item => item.wfreq);
   console.log(wash_freq);
 
-  var piechart = {
-    values: wash_freq,
-    //labels: otu_ids,
-    hovertext: otu_labels,
-    type: 'pie'
-  };
-
-  var data = [piechart];
-
-  var layout = {
-    height: 500,
-    width: 600
-  };
-
-  Plotly.newPlot('pie', data, layout);
+  var data = [
+    {
+      domain: { x: [0, 1], y: [0, 1] },
+      value: wash_freq,
+      title: { text: "<b>Belly Button Washing Frequency</b><br>Scrubs Per Week" },
+      type: "indicator",
+      mode: "gauge+number",
+      gauge: {
+        axis: { range: [null, 10] },
+      
+    }
+  }
+  ];
+  
+  var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+  Plotly.newPlot('gauge', data, layout);
 
 
 });
