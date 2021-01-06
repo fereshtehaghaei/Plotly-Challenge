@@ -212,16 +212,16 @@ function DropDownMenu() {
           axis: { range: [null, 10] },
           bar: {color: "red"},
           steps: [
-            { range: [0, 1], color: 'rgb(248, 243, 236)'},
-            { range: [1, 2], color: 'rgb(244, 241, 229)' },
-            { range: [2, 3], color: 'rgb(233, 230, 202)' },
-            { range: [3, 4], color: 'rgb(229, 231, 179)' },
+            { range: [0, 1], color: 'rgb(258, 250, 245)'},
+            { range: [1, 2], color: 'rgb(238, 235, 222)' },
+            { range: [2, 3], color: 'rgb(225, 225, 180)' },
+            { range: [3, 4], color: 'rgb(229, 231, 163)' },
             { range: [4, 5], color: 'rgb(213, 228, 157)' },
             { range: [5, 6], color: 'rgb(183, 204, 146)' },
-            { range: [6, 7], color: 'rgb(140, 191, 136)' },
-            { range: [7, 8], color: 'rgb(138, 187, 143)'  },
-            { range: [8, 9], color: 'rgb(130, 178, 135)' },
-            { range: [9, 10], color: 'rgb(118, 167, 122)' }
+            { range: [6, 7], color: 'rgb(150, 191, 136)' },
+            { range: [7, 8], color: 'rgb(140, 185, 126)'  },
+            { range: [8, 9], color: 'rgb(128, 178, 112)' },
+            { range: [9, 10], color: 'rgb(110, 167, 108)' }
           ],
        }
     }
