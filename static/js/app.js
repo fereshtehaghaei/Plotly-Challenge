@@ -105,6 +105,7 @@ function DropDownMenu() {
 
           var layout = {
             title: "<b>Belly Button Bacteria Top 10 OTUs<b>",
+            titlefont: {family: '"Arial, Helvetica, sans-serif'},
             margin: {
               l: 100,
               r: 100,
@@ -140,6 +141,7 @@ function DropDownMenu() {
 
           var layout = {
             title: "<b>Belly Button Bacteria Bubble Chart</b>",
+            titlefont: {family: '"Arial, Helvetica, sans-serif'},
             margin: {
                 l: 100,
                 r: 100,
@@ -189,34 +191,44 @@ function DropDownMenu() {
         console.log('HERE');
         console.log(metaDataID[0].wfreq); 
 
-    var data = [
+    var gaugechart = [
       {
         domain: { x: [0, 1], y: [0, 1] },
         value: metaDataID[0].wfreq,
         title: { text: "<b>Belly Button Washing Frequency</b><br>Scrubs Per Week" },
+        titlefont: {family: '"Arial, Helvetica, sans-serif'},
+        
+        
+        // text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
+        // textinfo: 'text',
+        // textposition:'inside',
+        // textfont:{
+        //  size : 16,
+        // },
+        
         type: "indicator",
         mode: "gauge+number",
         gauge: {
-          text: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1',''],
           axis: { range: [null, 10] },
           bar: {color: "red"},
           steps: [
-            { range: [0, 1], color: "rgb(204,214,204)"},
-            { range: [1, 2], color: "rgb(186,206,186)" },
-            { range: [2, 3], color: "rgb(168,199,168)" },
-            { range: [3, 4], color: "rgb(150,191,150)" },
-            { range: [4, 5], color: "rgb(132,184,132)" },
-            { range: [5, 6], color: "rgb(115,176,114)" },
-            { range: [6, 7], color: "rgb(95,168,96)" },
-            { range: [7, 8], color: "rgb(78,161,78)" },
-            { range: [8, 9], color: "rgb(60,153,60)" },
-            { range: [9, 10], color: "rgb(42,146,42)" }
+            { range: [0, 1], color: 'rgb(248, 243, 236)'},
+            { range: [1, 2], color: 'rgb(244, 241, 229)' },
+            { range: [2, 3], color: 'rgb(233, 230, 202)' },
+            { range: [3, 4], color: 'rgb(229, 231, 179)' },
+            { range: [4, 5], color: 'rgb(213, 228, 157)' },
+            { range: [5, 6], color: 'rgb(183, 204, 146)' },
+            { range: [6, 7], color: 'rgb(140, 191, 136)' },
+            { range: [7, 8], color: 'rgb(138, 187, 143)'  },
+            { range: [8, 9], color: 'rgb(130, 178, 135)' },
+            { range: [9, 10], color: 'rgb(118, 167, 122)' }
           ],
        }
     }
       ];
   
- 
+  var data = gaugechart;
+
   var layout = { width: 600, 
                  height: 500, 
                  margin: { t: 0, b: 0 } 
