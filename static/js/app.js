@@ -197,10 +197,11 @@ function DropDownMenu() {
         type: "indicator",
         mode: "gauge+number",
         gauge: {
+          text: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1',''],
           axis: { range: [null, 10] },
           bar: {color: "red"},
           steps: [
-            { range: [0, 1], color: "rgb(204,214,204)" },
+            { range: [0, 1], color: "rgb(204,214,204)"},
             { range: [1, 2], color: "rgb(186,206,186)" },
             { range: [2, 3], color: "rgb(168,199,168)" },
             { range: [3, 4], color: "rgb(150,191,150)" },
